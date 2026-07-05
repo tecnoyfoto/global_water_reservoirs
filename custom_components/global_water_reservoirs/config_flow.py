@@ -1,4 +1,4 @@
-﻿"""Config flow for Global Water Reservoirs."""
+"""Config flow for Global Water Reservoirs."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-﻿"""Constants for Global Water Reservoirs."""
+"""Constants for Global Water Reservoirs."""
 
 from __future__ import annotations
 

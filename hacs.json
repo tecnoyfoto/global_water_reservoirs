@@ -1,15 +1,11 @@
 {
   "name": "Global Water Reservoirs",
   "content_in_root": false,
-  "domains": [
-    "global_water_reservoirs"
+  "country": [
+    "ES",
+    "US"
   ],
   "homeassistant": "2024.6.0",
   "render_readme": true,
-  "zip_release": false,
-  "changelog": "https://github.com/tecnoyfoto/global_water_reservoirs/releases/tag/{version}",
-  "issues": "https://github.com/tecnoyfoto/global_water_reservoirs/issues",
-  "authors": [
-    "Tecnoyfoto"
-  ]
+  "zip_release": false
 }

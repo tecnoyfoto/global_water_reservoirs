@@ -1,4 +1,4 @@
-﻿"""Sensor platform for Global Water Reservoirs."""
+"""Sensor platform for Global Water Reservoirs."""
 
 from __future__ import annotations
 

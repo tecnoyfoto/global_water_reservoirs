@@ -1,4 +1,4 @@
-﻿"""USBR Reservoir Conditions provider (RISE).
+"""USBR Reservoir Conditions provider (RISE).
 
 Goals
 - Self-maintaining reservoir list: scraped from the public Reservoir Conditions page
