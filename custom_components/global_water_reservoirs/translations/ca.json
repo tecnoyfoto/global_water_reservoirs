@@ -1,0 +1,94 @@
+{
+  "title": "Embassaments globals",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Selecciona país",
+        "data": {
+          "provider": "Font de dades",
+          "country": "País"
+        }
+      },
+      "reservoirs": {
+        "title": "Selecciona embassaments",
+        "description": "Tria quins embassaments vols afegir. Per defecte s'actualitza cada 12 hores.",
+        "data": {
+          "reservoirs": "Embassaments",
+          "update_interval_hours": "Freqüència (hores)"
+        }
+      },
+      "provider": {
+        "data": {
+          "provider": "Font de dades"
+        },
+        "title": "Selecciona font de dades"
+      }
+    },
+    "error": {
+      "cannot_connect": "No es pot connectar amb la font de dades.",
+      "no_reservoirs_selected": "Selecciona com a mínim un embassament."
+    },
+    "abort": {
+      "no_providers": "No hi ha proveïdors disponibles per al país seleccionat."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Actualitza els ajustos del hub",
+        "description": "Selecciona quins embassaments vols seguir i cada quant refrescar les dades.",
+        "data": {
+          "reservoirs": "Embassaments",
+          "update_interval_hours": "Interval d'actualització (hores)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No s'ha pogut connectar. Torna-ho a provar.",
+      "no_reservoirs_selected": "Selecciona com a mínim un embassament."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "percent": {
+        "name": "Percentatge"
+      },
+      "volume": {
+        "name": "Volum"
+      },
+      "level": {
+        "name": "Nivell"
+      },
+      "capacity": {
+        "name": "Capacitat"
+      },
+      "record_datetime": {
+        "name": "Data/hora de la dada"
+      },
+      "data_age": {
+        "name": "Antiguitat de la dada"
+      },
+      "aggregate_percent": {
+        "name": "Percentatge agregat"
+      },
+      "aggregate_volume": {
+        "name": "Volum total"
+      },
+      "aggregate_capacity": {
+        "name": "Capacitat total"
+      },
+      "reservoir_count": {
+        "name": "Embassaments"
+      },
+      "reservoirs_with_data": {
+        "name": "Embassaments amb dades"
+      },
+      "stale_reservoir_count": {
+        "name": "Embassaments amb dades antigues"
+      },
+      "latest_record_datetime": {
+        "name": "Última dada rebuda"
+      }
+    }
+  }
+}

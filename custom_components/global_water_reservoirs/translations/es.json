@@ -1,0 +1,94 @@
+{
+  "title": "Embalses globales",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Selecciona país",
+        "data": {
+          "provider": "Fuente de datos",
+          "country": "País"
+        }
+      },
+      "reservoirs": {
+        "title": "Selecciona embalses",
+        "description": "Elige qué embalses quieres añadir. Por defecto se actualiza cada 12 horas.",
+        "data": {
+          "reservoirs": "Embalses",
+          "update_interval_hours": "Frecuencia (horas)"
+        }
+      },
+      "provider": {
+        "data": {
+          "provider": "Fuente de datos"
+        },
+        "title": "Selecciona fuente de datos"
+      }
+    },
+    "error": {
+      "cannot_connect": "No se puede conectar con la fuente de datos.",
+      "no_reservoirs_selected": "Selecciona al menos un embalse."
+    },
+    "abort": {
+      "no_providers": "No hay proveedores disponibles para el país seleccionado."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Actualizar ajustes del hub",
+        "description": "Selecciona qué embalses quieres seguir y cada cuánto refrescar los datos.",
+        "data": {
+          "reservoirs": "Embalses",
+          "update_interval_hours": "Intervalo de actualización (horas)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No se pudo conectar. Inténtalo de nuevo.",
+      "no_reservoirs_selected": "Selecciona al menos un embalse."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "percent": {
+        "name": "Porcentaje"
+      },
+      "volume": {
+        "name": "Volumen"
+      },
+      "level": {
+        "name": "Nivel"
+      },
+      "capacity": {
+        "name": "Capacidad"
+      },
+      "record_datetime": {
+        "name": "Fecha/hora del dato"
+      },
+      "data_age": {
+        "name": "Antigüedad del dato"
+      },
+      "aggregate_percent": {
+        "name": "Porcentaje agregado"
+      },
+      "aggregate_volume": {
+        "name": "Volumen total"
+      },
+      "aggregate_capacity": {
+        "name": "Capacidad total"
+      },
+      "reservoir_count": {
+        "name": "Embalses"
+      },
+      "reservoirs_with_data": {
+        "name": "Embalses con datos"
+      },
+      "stale_reservoir_count": {
+        "name": "Embalses con datos antiguos"
+      },
+      "latest_record_datetime": {
+        "name": "Último dato recibido"
+      }
+    }
+  }
+}

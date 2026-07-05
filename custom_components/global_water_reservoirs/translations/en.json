@@ -1,0 +1,94 @@
+{
+  "title": "Global Water Reservoirs",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select country",
+        "data": {
+          "provider": "Data source",
+          "country": "Country"
+        }
+      },
+      "reservoirs": {
+        "title": "Select reservoirs",
+        "description": "Choose which reservoirs to add. Default update interval is 12 hours.",
+        "data": {
+          "reservoirs": "Reservoirs",
+          "update_interval_hours": "Update interval (hours)"
+        }
+      },
+      "provider": {
+        "data": {
+          "provider": "Data source"
+        },
+        "title": "Select data source"
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the data source.",
+      "no_reservoirs_selected": "Select at least one reservoir."
+    },
+    "abort": {
+      "no_providers": "No providers are available for the selected country."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Update hub settings",
+        "description": "Select which reservoirs to track and how often to refresh the data.",
+        "data": {
+          "reservoirs": "Reservoirs",
+          "update_interval_hours": "Update interval (hours)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect. Please try again.",
+      "no_reservoirs_selected": "Select at least one reservoir."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "percent": {
+        "name": "Percent"
+      },
+      "volume": {
+        "name": "Volume"
+      },
+      "level": {
+        "name": "Level"
+      },
+      "capacity": {
+        "name": "Capacity"
+      },
+      "record_datetime": {
+        "name": "Data timestamp"
+      },
+      "data_age": {
+        "name": "Data age"
+      },
+      "aggregate_percent": {
+        "name": "Aggregate percent"
+      },
+      "aggregate_volume": {
+        "name": "Total volume"
+      },
+      "aggregate_capacity": {
+        "name": "Total capacity"
+      },
+      "reservoir_count": {
+        "name": "Reservoirs"
+      },
+      "reservoirs_with_data": {
+        "name": "Reservoirs with data"
+      },
+      "stale_reservoir_count": {
+        "name": "Reservoirs with stale data"
+      },
+      "latest_record_datetime": {
+        "name": "Latest data timestamp"
+      }
+    }
+  }
+}

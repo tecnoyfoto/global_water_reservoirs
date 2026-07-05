@@ -1,0 +1,17 @@
+{
+  "codeowners": [
+    "@tecnoyfoto"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/tecnoyfoto/global_water_reservoirs",
+  "domain": "global_water_reservoirs",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/tecnoyfoto/global_water_reservoirs/issues",
+  "loggers": [
+    "global_water_reservoirs"
+  ],
+  "name": "Global Water Reservoirs",
+  "requirements": [],
+  "version": "1.1.22"
+}
