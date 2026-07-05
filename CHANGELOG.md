@@ -2,6 +2,19 @@
 
 # Changelog
 
+## 1.1.23 - 2026-07-05
+
+### Added
+
+- Added HACS validation workflow.
+- Added Hassfest validation workflow.
+
+### Changed
+
+- Simplified `hacs.json` to match the current HACS validation schema.
+- Removed UTF-8 BOM markers from Python files.
+- Sorted manifest keys for Hassfest.
+
 ## 1.1.22 - 2026-05-21
 
 ### Added
