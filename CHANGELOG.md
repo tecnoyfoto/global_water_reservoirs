@@ -2,6 +2,18 @@
 
 # Changelog
 
+## 1.1.24 - 2026-07-24
+
+### Fixed
+
+- Restored SAIH Ebro connectivity by adding the official FNMT intermediate CA
+  omitted by the upstream server, while keeping full TLS verification enabled.
+
+### Changed
+
+- Added retries for transient SAIH Ebro network errors and timeouts.
+- Added detailed provider error logging to the configuration and options flows.
+
 ## 1.1.23 - 2026-07-05
 
 ### Added

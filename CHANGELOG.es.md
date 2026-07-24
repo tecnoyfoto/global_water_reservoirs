@@ -2,6 +2,21 @@
 
 # Historial de cambios
 
+## 1.1.24 - 2026-07-24
+
+### Corregido
+
+- Restaurada la conexión con SAIH Ebro mediante la CA intermedia oficial de la
+  FNMT omitida por el servidor de origen, manteniendo activa toda la
+  verificación TLS.
+
+### Cambiado
+
+- Añadidos reintentos para errores de red y tiempos de espera transitorios de
+  SAIH Ebro.
+- Añadido el registro detallado de errores de los proveedores en los flujos de
+  configuración y opciones.
+
 ## 1.1.23 - 2026-07-05
 
 ### Añadido

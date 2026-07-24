@@ -2,10 +2,15 @@
 
 from __future__ import annotations
 
+import asyncio
+import ssl
 from datetime import datetime
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 import async_timeout
+from aiohttp import ClientConnectorCertificateError, ClientError
 
 from homeassistant.util import dt as dt_util
 
@@ -14,6 +19,19 @@ from .base import BaseReservoirProvider, ReservoirData
 BASE_URL = "https://home.saihebro.com"
 MAP_SLUG = "mapa-embalses-HG-toda-la-cuenca"
 DATA_URL = f"{BASE_URL}/api/mapa/getDatosMapa?slug={MAP_SLUG}"
+DOWNLOAD_ATTEMPTS = 3
+DOWNLOAD_TIMEOUT_SECONDS = 15
+FNMT_INTERMEDIATE_CA = (
+    Path(__file__).parent / "certs" / "fnmt_ac_componentes_informaticos.pem"
+)
+
+
+@lru_cache(maxsize=1)
+def _ssl_context() -> ssl.SSLContext:
+    """Return a verified TLS context with SAIH Ebro's omitted intermediate CA."""
+    context = ssl.create_default_context()
+    context.load_verify_locations(cafile=FNMT_INTERMEDIATE_CA)
+    return context
 
 
 class EbroSAIHProvider(BaseReservoirProvider):
@@ -83,10 +101,33 @@ class EbroSAIHProvider(BaseReservoirProvider):
         return out
 
     async def _download(self, session) -> list[dict[str, Any]]:
-        async with async_timeout.timeout(45):
-            resp = await session.get(DATA_URL, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
-            resp.raise_for_status()
-            payload = await resp.json(content_type=None)
+        for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+            try:
+                async with async_timeout.timeout(DOWNLOAD_TIMEOUT_SECONDS):
+                    async with session.get(
+                        DATA_URL,
+                        headers={
+                            "User-Agent": "Mozilla/5.0",
+                            "Accept": "application/json",
+                        },
+                        ssl=_ssl_context(),
+                    ) as resp:
+                        resp.raise_for_status()
+                        payload = await resp.json(content_type=None)
+                break
+            except ClientConnectorCertificateError:
+                raise
+            except (ClientError, TimeoutError) as err:
+                if attempt == DOWNLOAD_ATTEMPTS:
+                    raise
+                self.logger.warning(
+                    "SAIH Ebro request failed on attempt %s/%s (%s: %s); retrying",
+                    attempt,
+                    DOWNLOAD_ATTEMPTS,
+                    type(err).__name__,
+                    err,
+                )
+                await asyncio.sleep(attempt)
 
         data = payload.get("DATOS") if isinstance(payload, dict) else None
         if not isinstance(data, list):

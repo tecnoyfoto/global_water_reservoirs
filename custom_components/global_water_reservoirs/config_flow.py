@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 import voluptuous as vol
@@ -29,6 +30,8 @@ from .const import (
     SUPPORTED_COUNTRIES,
     SUPPORTED_PROVIDERS_BY_COUNTRY,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def _lang_code(hass) -> str:
@@ -159,7 +162,12 @@ class GlobalWaterReservoirsConfigFlow(config_entries.ConfigFlow, domain="global_
         if self._reservoirs_index is None:
             try:
                 self._reservoirs_index = await provider.async_list_reservoirs(session)
-            except Exception:  # noqa: BLE001
+            except Exception as err:  # noqa: BLE001
+                _LOGGER.exception(
+                    "Failed to list reservoirs for provider %s (%s)",
+                    provider.id,
+                    type(err).__name__,
+                )
                 errors["base"] = "cannot_connect"
                 self._reservoirs_index = {}
 
@@ -257,7 +265,12 @@ class GlobalWaterReservoirsOptionsFlowHandler(config_entries.OptionsFlow):
         if self._reservoirs_index is None:
             try:
                 self._reservoirs_index = await provider.async_list_reservoirs(session)
-            except Exception:  # noqa: BLE001
+            except Exception as err:  # noqa: BLE001
+                _LOGGER.exception(
+                    "Failed to list reservoirs for provider %s (%s)",
+                    provider.id,
+                    type(err).__name__,
+                )
                 errors["base"] = "cannot_connect"
                 self._reservoirs_index = {}
 
