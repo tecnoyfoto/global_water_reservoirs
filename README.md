@@ -1,5 +1,9 @@
 [Leer en español](README.es.md)
 
+[![Latest release](https://img.shields.io/github/v/release/tecnoyfoto/global_water_reservoirs)](https://github.com/tecnoyfoto/global_water_reservoirs/releases/latest)
+[![HACS](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hacs.yml/badge.svg)](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hacs.yml)
+[![Hassfest](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hassfest.yml/badge.svg)](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hassfest.yml)
+
 # Global Water Reservoirs for Home Assistant
 
 Global Water Reservoirs is an **unofficial** Home Assistant custom integration for tracking reservoir storage data from public water-data sources.
@@ -10,7 +14,9 @@ The first public focus is Spain, where public reservoir data is available from m
 
 ## Current Status
 
-Version `1.1.22` is a release-candidate style build.
+The integration is publicly available through HACS as a custom repository.
+See the [latest published release](https://github.com/tecnoyfoto/global_water_reservoirs/releases/latest)
+and the [changelog](CHANGELOG.md) for the current version and release notes.
 
 Current priorities:
 

@@ -1,5 +1,9 @@
 [Read this in English](README.md)
 
+[![Última versión](https://img.shields.io/github/v/release/tecnoyfoto/global_water_reservoirs)](https://github.com/tecnoyfoto/global_water_reservoirs/releases/latest)
+[![HACS](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hacs.yml/badge.svg)](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hacs.yml)
+[![Hassfest](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hassfest.yml/badge.svg)](https://github.com/tecnoyfoto/global_water_reservoirs/actions/workflows/hassfest.yml)
+
 # Embalses globales para Home Assistant
 
 Embalses globales es una integración personalizada **no oficial** para Home Assistant que permite seguir datos de almacenamiento de embalses desde fuentes públicas.
@@ -10,7 +14,10 @@ El primer foco público es España, donde hay datos disponibles desde varias fue
 
 ## Estado actual
 
-La versión `1.1.22` es una versión tipo release candidate.
+La integración está disponible públicamente mediante HACS como repositorio
+personalizado. Consulta la [última versión publicada](https://github.com/tecnoyfoto/global_water_reservoirs/releases/latest)
+y el [historial de cambios](CHANGELOG.es.md) para conocer la versión actual y
+sus novedades.
 
 Prioridades actuales:
 
