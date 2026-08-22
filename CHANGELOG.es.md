@@ -2,6 +2,15 @@
 
 # Historial de cambios
 
+## 1.1.25 - 2026-08-22
+
+### Corregido
+
+- Creación del contexto TLS de SAIH Ebro en el ejecutor de Home Assistant para
+  evitar el bloqueo del bucle de eventos.
+- Eliminados los iconos de marca duplicados de la raíz; Home Assistant utiliza
+  las copias del directorio `brand`.
+
 ## 1.1.24 - 2026-07-24
 
 ### Corregido

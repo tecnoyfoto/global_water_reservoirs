@@ -60,7 +60,7 @@ from .providers.tinto_odiel_piedras_miteco import TintoOdielPiedrasMitecoProvide
 from .providers.usbr_rise_reservoir_conditions import USBRRISEReservoirConditionsProvider
 
 
-def _get_provider(country_id: str, provider_id: str):
+def _get_provider(hass: HomeAssistant, country_id: str, provider_id: str):
     if country_id == COUNTRY_ES:
         if provider_id == PROVIDER_CANTABRICO:
             return CantabricoMitecoProvider()
@@ -69,7 +69,7 @@ def _get_provider(country_id: str, provider_id: str):
         if provider_id == PROVIDER_DUERO:
             return DueroCHDProvider()
         if provider_id == PROVIDER_EBRO:
-            return EbroSAIHProvider()
+            return EbroSAIHProvider(hass)
         if provider_id == PROVIDER_GALICIA_COSTA:
             return GaliciaCostaMitecoProvider()
         if provider_id == PROVIDER_GUADALETE_BARBATE:
@@ -172,7 +172,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     _repair_config_entry(hass, entry)
 
-    provider = _get_provider(country_id, provider_id)
+    provider = _get_provider(hass, country_id, provider_id)
 
     session = aiohttp_client.async_get_clientsession(hass)
 

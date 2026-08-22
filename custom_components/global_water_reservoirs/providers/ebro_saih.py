@@ -12,6 +12,7 @@ from typing import Any
 import async_timeout
 from aiohttp import ClientConnectorCertificateError, ClientError
 
+from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
 
 from .base import BaseReservoirProvider, ReservoirData
@@ -40,6 +41,10 @@ class EbroSAIHProvider(BaseReservoirProvider):
     source_url = f"{BASE_URL}/tiempo-real/estacion-embalses-E001-ebro"
     allowed_update_intervals_hours = [1, 2, 6, 12, 24]
     default_update_interval_hours = 2
+
+    def __init__(self, hass: HomeAssistant) -> None:
+        super().__init__()
+        self._hass = hass
 
     async def async_list_reservoirs(self, session) -> dict[str, str]:
         data = await self._download(session)
@@ -101,6 +106,8 @@ class EbroSAIHProvider(BaseReservoirProvider):
         return out
 
     async def _download(self, session) -> list[dict[str, Any]]:
+        ssl_context = await self._hass.async_add_executor_job(_ssl_context)
+
         for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
             try:
                 async with async_timeout.timeout(DOWNLOAD_TIMEOUT_SECONDS):
@@ -110,7 +117,7 @@ class EbroSAIHProvider(BaseReservoirProvider):
                             "User-Agent": "Mozilla/5.0",
                             "Accept": "application/json",
                         },
-                        ssl=_ssl_context(),
+                        ssl=ssl_context,
                     ) as resp:
                         resp.raise_for_status()
                         payload = await resp.json(content_type=None)

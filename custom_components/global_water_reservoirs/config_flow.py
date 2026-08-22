@@ -154,7 +154,7 @@ class GlobalWaterReservoirsConfigFlow(config_entries.ConfigFlow, domain="global_
         assert self._country_id is not None
         assert self._provider_id is not None
 
-        provider = _get_provider(self._country_id, self._provider_id)
+        provider = _get_provider(self.hass, self._country_id, self._provider_id)
         allowed_intervals = getattr(provider, "allowed_update_intervals_hours", [DEFAULT_UPDATE_INTERVAL_HOURS])
 
         session = aiohttp_client.async_get_clientsession(self.hass)
@@ -257,7 +257,7 @@ class GlobalWaterReservoirsOptionsFlowHandler(config_entries.OptionsFlow):
 
         country_id = self._config_entry.data.get(CONF_COUNTRY)
         provider_id = self._config_entry.data.get(CONF_PROVIDER)
-        provider = _get_provider(country_id, provider_id)
+        provider = _get_provider(self.hass, country_id, provider_id)
 
         allowed_intervals = getattr(provider, "allowed_update_intervals_hours", [DEFAULT_UPDATE_INTERVAL_HOURS])
 

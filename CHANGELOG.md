@@ -2,6 +2,15 @@
 
 # Changelog
 
+## 1.1.25 - 2026-08-22
+
+### Fixed
+
+- Build the SAIH Ebro TLS context in Home Assistant's executor to avoid
+  blocking the event loop.
+- Remove duplicate root-level brand icons; Home Assistant uses the copies in
+  the `brand` directory.
+
 ## 1.1.24 - 2026-07-24
 
 ### Fixed
