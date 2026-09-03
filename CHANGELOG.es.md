@@ -2,6 +2,17 @@
 
 # Historial de cambios
 
+## 1.1.26 - 2026-09-03
+
+### Corregido
+
+- Aisladas todas las peticiones de SAIH Guadalquivir de las cookies ASP.NET del
+  sitio, que podían provocar que el servidor devolviese una tabla de embalses
+  incompleta.
+- Analizadas y combinadas las tablas provinciales resumidas y detalladas para
+  ofrecer capacidad, nivel, volumen y porcentaje en todos los embalses
+  publicados por la fuente.
+
 ## 1.1.25 - 2026-08-22
 
 ### Corregido

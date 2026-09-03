@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from datetime import timedelta
 
+from aiohttp import ClientSession, DummyCookieJar
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import aiohttp_client
@@ -102,6 +104,22 @@ def _get_provider(hass: HomeAssistant, country_id: str, provider_id: str):
     raise ValueError(f"Unsupported provider: {country_id}:{provider_id}")
 
 
+def _get_provider_session(
+    hass: HomeAssistant, provider_id: str, *, auto_cleanup: bool = True
+) -> ClientSession:
+    """Return the appropriate HTTP session for a provider."""
+    if provider_id == PROVIDER_GUADALQUIVIR:
+        # The SAIH Guadalquivir site changes the Resguardo response according
+        # to ASP.NET cookies set by the provincial pages. A cookie-free session
+        # ensures every reservoir receives the complete public data table.
+        return aiohttp_client.async_create_clientsession(
+            hass,
+            auto_cleanup=auto_cleanup,
+            cookie_jar=DummyCookieJar(),
+        )
+    return aiohttp_client.async_get_clientsession(hass)
+
+
 def _get_selected_reservoirs(entry: ConfigEntry) -> list[str]:
     reservoirs = entry.options.get(CONF_RESERVOIRS)
     if reservoirs is None:
@@ -174,7 +192,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     provider = _get_provider(hass, country_id, provider_id)
 
-    session = aiohttp_client.async_get_clientsession(hass)
+    session = _get_provider_session(hass, provider_id)
 
     coordinator = GlobalWaterReservoirsDataUpdateCoordinator(
         hass=hass,

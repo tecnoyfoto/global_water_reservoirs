@@ -20,7 +20,7 @@ RESGUARDO_URL = f"{BASE_URL}/ResguardoEmbalses.aspx"
 PAGES = ("EmbalGR.aspx", "EmbalCO.aspx", "EmbalJA.aspx", "EmbalSE.aspx")
 
 _UPDATED_RE = re.compile(r"Actualizados:\s*([0-9]{2}/[0-9]{2}/[0-9]{4}\s+[0-9]{2}:[0-9]{2}:[0-9]{2})")
-_TABLE_RE = re.compile(r"<table[^>]+id=\"[^\"]*_(E\d+)_tabla\"[\s\S]*?</table>", re.IGNORECASE)
+_TABLE_RE = re.compile(r"<table\b[^>]*>[\s\S]*?</table>", re.IGNORECASE)
 _CAPTION_RE = re.compile(r"<caption[^>]*>([\s\S]*?)</caption>", re.IGNORECASE)
 _ROW_RE = re.compile(r"<tr[\s\S]*?</tr>", re.IGNORECASE)
 
@@ -123,23 +123,29 @@ class GuadalquivirSAIHProvider(BaseReservoirProvider):
 def _parse_current_page(html: str) -> dict[str, dict[str, Any]]:
     out: dict[str, dict[str, Any]] = {}
     for table_match in _TABLE_RE.finditer(html):
-        code = table_match.group(1)
         table = table_match.group(0)
         caption_match = _CAPTION_RE.search(table)
         if not caption_match:
             continue
-        name = _clean_text(caption_match.group(1))
-        if name.startswith(code):
-            name = name[len(code) :].strip()
+        caption = _clean_text(caption_match.group(1))
+        code_name_match = re.match(r"^(E\d+)\s+(.+)$", caption)
+        if not code_name_match:
+            continue
+        code, name = code_name_match.groups()
 
-        item: dict[str, Any] = {"name": _expand_name(name)}
+        item = out.setdefault(code, {"name": _expand_name(name)})
         for row in _ROW_RE.findall(table):
             text = _clean_text(row)
-            if "Volumen" in text:
+            if "Capacidad" in text:
+                item["capacity_hm3"] = _first_float(text)
+            elif "Nivel" in text:
+                item["level_m"] = _first_float(text)
+            elif "Volumen" in text:
                 item["volume_hm3"] = _first_float(text)
+            elif text.startswith("%"):
+                item["percent"] = _first_float(text)
             elif "Caudal" in text:
                 item["outflow_m3_s"] = _first_float(text)
-        out[code] = item
     return out
 
 

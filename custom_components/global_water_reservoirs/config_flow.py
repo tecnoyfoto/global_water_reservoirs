@@ -9,7 +9,7 @@ import voluptuous as vol
 
 from homeassistant import config_entries
 from homeassistant.const import CONF_COUNTRY as HA_CONF_COUNTRY
-from homeassistant.helpers import aiohttp_client, config_validation as cv
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.selector import (
     SelectOptionDict,
     SelectSelector,
@@ -17,7 +17,7 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from . import _get_provider
+from . import _get_provider, _get_provider_session
 from .const import (
     CONF_COUNTRY,
     CONF_PROVIDER,
@@ -27,6 +27,7 @@ from .const import (
     DOMAIN,
     LOCALIZED_COUNTRY_LABELS,
     LOCALIZED_PROVIDER_LABELS,
+    PROVIDER_GUADALQUIVIR,
     SUPPORTED_COUNTRIES,
     SUPPORTED_PROVIDERS_BY_COUNTRY,
 )
@@ -157,9 +158,10 @@ class GlobalWaterReservoirsConfigFlow(config_entries.ConfigFlow, domain="global_
         provider = _get_provider(self.hass, self._country_id, self._provider_id)
         allowed_intervals = getattr(provider, "allowed_update_intervals_hours", [DEFAULT_UPDATE_INTERVAL_HOURS])
 
-        session = aiohttp_client.async_get_clientsession(self.hass)
-
         if self._reservoirs_index is None:
+            session = _get_provider_session(
+                self.hass, self._provider_id, auto_cleanup=False
+            )
             try:
                 self._reservoirs_index = await provider.async_list_reservoirs(session)
             except Exception as err:  # noqa: BLE001
@@ -170,6 +172,9 @@ class GlobalWaterReservoirsConfigFlow(config_entries.ConfigFlow, domain="global_
                 )
                 errors["base"] = "cannot_connect"
                 self._reservoirs_index = {}
+            finally:
+                if self._provider_id == PROVIDER_GUADALQUIVIR:
+                    session.detach()
 
         if user_input is not None and not errors:
             selected = list(user_input.get(CONF_RESERVOIRS, []))
@@ -261,8 +266,10 @@ class GlobalWaterReservoirsOptionsFlowHandler(config_entries.OptionsFlow):
 
         allowed_intervals = getattr(provider, "allowed_update_intervals_hours", [DEFAULT_UPDATE_INTERVAL_HOURS])
 
-        session = aiohttp_client.async_get_clientsession(self.hass)
         if self._reservoirs_index is None:
+            session = _get_provider_session(
+                self.hass, provider_id, auto_cleanup=False
+            )
             try:
                 self._reservoirs_index = await provider.async_list_reservoirs(session)
             except Exception as err:  # noqa: BLE001
@@ -273,6 +280,9 @@ class GlobalWaterReservoirsOptionsFlowHandler(config_entries.OptionsFlow):
                 )
                 errors["base"] = "cannot_connect"
                 self._reservoirs_index = {}
+            finally:
+                if provider_id == PROVIDER_GUADALQUIVIR:
+                    session.detach()
 
         if user_input is not None and not errors:
             selected = list(user_input.get(CONF_RESERVOIRS, []))

@@ -2,6 +2,16 @@
 
 # Changelog
 
+## 1.1.26 - 2026-09-03
+
+### Fixed
+
+- Isolate all SAIH Guadalquivir requests from the site's ASP.NET cookies, which
+  could make the server return an incomplete reservoir table.
+- Parse and merge both the summary and detailed provincial reservoir tables so
+  capacity, level, volume, and percentage are available for every reservoir
+  published by the source.
+
 ## 1.1.25 - 2026-08-22
 
 ### Fixed
