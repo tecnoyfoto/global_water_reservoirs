@@ -2,6 +2,20 @@
 
 # Historial de cambios
 
+## 1.1.27 - 2026-09-04
+
+### Corregido
+
+- Restaurada la conexión con CH Duero en instalaciones de Home Assistant que
+  rechazan el certificado intermedio FNMT inválido enviado por el servidor de
+  origen, manteniendo activa toda la verificación TLS.
+- Creación del contexto TLS de CH Duero en el ejecutor de Home Assistant para
+  evitar el bloqueo del bucle de eventos.
+- Añadidos reintentos para errores transitorios de red, HTTP, tiempo de espera
+  y respuestas inválidas de CH Duero.
+- Añadida compatibilidad con separadores de miles y decimales en los valores de
+  CH Duero, corrigiendo el volumen indicado para el embalse de Almendra.
+
 ## 1.1.26 - 2026-09-03
 
 ### Corregido

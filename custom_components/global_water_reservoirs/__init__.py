@@ -69,7 +69,7 @@ def _get_provider(hass: HomeAssistant, country_id: str, provider_id: str):
         if provider_id == PROVIDER_CATALONIA:
             return CatalunyaTransparenciaProvider()
         if provider_id == PROVIDER_DUERO:
-            return DueroCHDProvider()
+            return DueroCHDProvider(hass)
         if provider_id == PROVIDER_EBRO:
             return EbroSAIHProvider(hass)
         if provider_id == PROVIDER_GALICIA_COSTA:

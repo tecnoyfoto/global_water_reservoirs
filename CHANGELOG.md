@@ -2,6 +2,19 @@
 
 # Changelog
 
+## 1.1.27 - 2026-09-04
+
+### Fixed
+
+- Restored CH Duero connectivity on Home Assistant installations that reject
+  the invalid FNMT intermediate certificate sent by the upstream server, while
+  keeping full TLS verification enabled.
+- Build the CH Duero TLS context in Home Assistant's executor to avoid blocking
+  the event loop.
+- Retry transient CH Duero network, HTTP, timeout, and invalid-response errors.
+- Parse localized thousands and decimal separators in CH Duero values, fixing
+  the reported volume for the Almendra reservoir.
+
 ## 1.1.26 - 2026-09-03
 
 ### Fixed
