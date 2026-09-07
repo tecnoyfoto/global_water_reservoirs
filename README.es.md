@@ -51,7 +51,8 @@ Hubs soportados:
 
 - Catalunya
 - Cuenca del Duero
-- Cuenca del Ebro
+- Cuenca del Ebro, incluido el catálogo público completo de SAIH Ebro con
+  datos utilizables
 - Cuenca del Guadiana
 - Cuenca del Guadalquivir
 - Cuenca del Júcar

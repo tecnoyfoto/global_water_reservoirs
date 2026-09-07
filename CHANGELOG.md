@@ -2,6 +2,23 @@
 
 # Changelog
 
+## 1.1.28 - 2026-09-07
+
+### Added
+
+- Expanded SAIH Ebro coverage from the 12 reservoirs on the general basin map
+  to all 82 reservoirs currently exposing usable public data through the
+  official regional maps, daily summary, and current station values.
+- Added reservoirs requested by users, including Pajares and González Lacasa.
+
+### Changed
+
+- Discover the official SAIH Ebro regional map catalogue dynamically and
+  deduplicate reservoirs by their stable station code.
+- Cache Ebro catalogue discovery and refresh only the sources required by the
+  selected reservoirs, with bounded request concurrency.
+- Preserve existing Ebro device and entity identifiers.
+
 ## 1.1.27 - 2026-09-04
 
 ### Fixed

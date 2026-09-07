@@ -2,6 +2,26 @@
 
 # Historial de cambios
 
+## 1.1.28 - 2026-09-07
+
+### Añadido
+
+- Ampliada la cobertura de SAIH Ebro desde los 12 embalses del mapa general de
+  la cuenca hasta los 82 embalses que actualmente ofrecen datos públicos
+  utilizables mediante los mapas regionales, el resumen diario y los valores
+  actuales de las estaciones oficiales.
+- Añadidos embalses solicitados por los usuarios, incluidos Pajares y González
+  Lacasa.
+
+### Cambiado
+
+- Descubrimiento dinámico del catálogo oficial de mapas regionales de SAIH
+  Ebro y eliminación de duplicados mediante el código estable de cada estación.
+- Caché del catálogo del Ebro y actualización exclusiva de las fuentes
+  necesarias para los embalses seleccionados, con concurrencia limitada.
+- Conservados los identificadores existentes de dispositivos y entidades del
+  Ebro.
+
 ## 1.1.27 - 2026-09-04
 
 ### Corregido
